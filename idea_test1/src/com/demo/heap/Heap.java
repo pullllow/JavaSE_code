@@ -27,7 +27,7 @@ public class Heap {
         heap.add(arr1);
         heap.add(arr2);
 
-        heap.add(arr1);
+        heap.add(arr2);
 
 //        heap.add(new int[]{1,2});
 //        heap.add(new int[]{2,1});
