@@ -90,24 +90,40 @@ public class TreeNodeOrderDemo {
      * @return void
      **/
     public static void preOrder(TreeNode root) {
-        if (root == null) {
-            return;
-        }
+        if(root==null) return;
+
+        LinkedList<TreeNode> stack = new LinkedList<>();
 
         TreeNode cur = root;
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        stack.offer(root);
-        while (!stack.isEmpty()) {
+        stack.offer(cur);
+        while(!stack.isEmpty()) {
             cur = stack.pollLast();
             System.out.println(cur);
-
-            if (cur.right != null) {
+            if(cur.right!=null) {
                 stack.offer(cur.right);
             }
-            if (cur.left != null) {
+            if(cur.left!=null) {
                 stack.offer(cur.left);
             }
         }
+//        if (root == null) {
+//            return;
+//        }
+//
+//        TreeNode cur = root;
+//        LinkedList<TreeNode> stack = new LinkedList<>();
+//        stack.offer(root);
+//        while (!stack.isEmpty()) {
+//            cur = stack.pollLast();
+//            System.out.println(cur);
+//
+//            if (cur.right != null) {
+//                stack.offer(cur.right);
+//            }
+//            if (cur.left != null) {
+//                stack.offer(cur.left);
+//            }
+//        }
     }
 
 
@@ -120,21 +136,42 @@ public class TreeNodeOrderDemo {
     public static void inOrder(TreeNode root) {
 
         LinkedList<TreeNode> stack = new LinkedList<>();
-
         TreeNode cur = root;
-
-        while (!stack.isEmpty() || cur != null) {
-            if (cur != null) {
+        while(!stack.isEmpty() || cur!=null) {
+            if(cur!=null) {
                 stack.offer(cur);
                 cur = cur.left;
+
             } else {
                 cur = stack.pollLast();
                 System.out.println(cur);
                 cur = cur.right;
             }
-
-
         }
+
+
+
+
+
+
+
+
+//        LinkedList<TreeNode> stack = new LinkedList<>();
+//
+//        TreeNode cur = root;
+//
+//        while (!stack.isEmpty() || cur != null) {
+//            if (cur != null) {
+//                stack.offer(cur);
+//                cur = cur.left;
+//            } else {
+//                cur = stack.pollLast();
+//                System.out.println(cur);
+//                cur = cur.right;
+//            }
+//
+//
+//        }
 
     }
 
@@ -146,29 +183,56 @@ public class TreeNodeOrderDemo {
      * @return void
      **/
     public static void postOrder(TreeNode root) {
-        if (root == null) {
-            return;
-        }
+        if(root==null) return;
+
 
         LinkedList<TreeNode> stack = new LinkedList<>();
-        LinkedList<TreeNode> collect = new LinkedList<>();
-        stack.offer(root);
 
-        while (!stack.isEmpty()) {
-            TreeNode cur = stack.pollLast();
-            if (cur.left != null) {
-                stack.offer(cur.left);
-            }
-            if (cur.right != null) {
-                stack.offer(cur.right);
-            }
-            collect.offer(cur);
+        LinkedList<TreeNode> collection = new LinkedList<>();
 
+        TreeNode cur = root;
+        stack.offer(cur);
+
+        while(!stack.isEmpty()) {
+            cur= stack.pollLast();
+
+            if(cur.left!=null) {
+                stack.offer(cur);
+            }
+            if(cur.right!=null) {
+                stack.offer(cur);
+            }
+            collection.offer(cur);
         }
-        while (!collect.isEmpty()) {
-            TreeNode cur = collect.pollLast();
-            System.out.println(cur);
-        }
+
+        while (!collection.isEmpty()) System.out.println(collection.pollLast());
+
+
+
+
+//        if (root == null) {
+//            return;
+//        }
+//
+//        LinkedList<TreeNode> stack = new LinkedList<>();
+//        LinkedList<TreeNode> collect = new LinkedList<>();
+//        stack.offer(root);
+//
+//        while (!stack.isEmpty()) {
+//            TreeNode cur = stack.pollLast();
+//            if (cur.left != null) {
+//                stack.offer(cur.left);
+//            }
+//            if (cur.right != null) {
+//                stack.offer(cur.right);
+//            }
+//            collect.offer(cur);
+//
+//        }
+//        while (!collect.isEmpty()) {
+//            TreeNode cur = collect.pollLast();
+//            System.out.println(cur);
+//        }
 
 
     }

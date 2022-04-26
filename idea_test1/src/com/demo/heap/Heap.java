@@ -6,13 +6,17 @@ package com.demo.heap;
  *  @Version V1.0
  */
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.PriorityQueue;
+
+import java.util.*;
+
 
 public class Heap {
 
     public static void main(String[] args) {
+
+
+
+
 //        PriorityQueue<int[]> heap = new PriorityQueue<>(new Comparator<int[]>() {
 //            @Override
 //            public int compare(int[] o1, int[] o2) {
@@ -20,6 +24,9 @@ public class Heap {
 //            }
 //        });
 
+
+        //PriorityQueue<int[]> h = (o1,o2) -> o1[0]-o2[0];
+       
         PriorityQueue<int[]> heap = new PriorityQueue<>((o1,o2)->o1[1]-o2[1]);
         int[] arr1 = {1,2};
         int[] arr2 = {1,3};

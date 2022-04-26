@@ -10,66 +10,84 @@ import java.util.*;
 
 
 public class Test1 {
+
     public static void main(String[] args) {
+
+
+        PriorityQueue<int[]> heap = new PriorityQueue<>((o1,o2)->o1[1]-o2[1]);
+
+
+
+
+
         Scanner sc = new Scanner(System.in);
-        /*
-        5 7
-        1 2 3 4 5
-        Q 1 5
-        U 3 6
-        Q 3 4
-        Q 4 5
-        U 4 5
-        U 2 9
-        Q 1 5
-        */
-        /*int[] socres = new int[1];
-        int index = 1;
-        int num = 0;*/
 
-        while(sc.hasNext()) {
-            int num = sc.nextInt();
-            int manage = sc.nextInt();
-            int[] socres = new int[num];
-            for(int i=0;i<num;i++) {
-                socres[i] = sc.nextInt();
-            }
-            String[] p =new String[manage];
-            int[][] proces  = new int[manage][2];
-            for(int i=0;i<manage;i++) {
-                p[i] = sc.next();
-                proces[i][0] = sc.nextInt();
-                proces[i][1] = sc.nextInt();
+        String cur  = sc.nextLine();
+        String ans = ""; //3[a4[b]] 3[a]2[b]
 
-            }
+        Info process = process(cur, 0, 0);
+//        ans = process;
 
-            for(int i=0;i<manage;i++) {
-                if(p[i].equals("U")) {
-                    update(socres,proces[i][0], proces[i][1]);
-                } else {
-                    System.out.println();
-                    System.out.println(max(socres,proces[i][0], proces[i][1]));
-                }
-            }
+        System.out.println(process.res);
+//        int i = 0;
 
-        }
+
 
 
     }
 
-    public static int max(int[] arr ,int left, int right) {
-        int l = Math.min(left,right)-1;
-        int r=  Math.max(left,right)-1;
-        int res = Integer.MIN_VALUE;
-        for(int i=Math.max(0,l);i<=r&&i<arr.length;i++) {
-            res = Math.max(res,arr[i]);
+    public static Info process(String cur, int index , int num) {
+
+        if(index==cur.length()) {
+            return new Info();
         }
+        String s = "";
+        String ans = "";
+        int cnt = 0;
+        int i=index;
+        Info res = new Info();
+
+        while(i<cur.length()) {
+            char ch = cur.charAt(i);
+            if(ch>='0' && ch<='9') {
+                cnt = cnt*10+ch-'0';
+                i++;
+            } else if(ch=='[') {
+                 Info temp =  process(cur,i+1,cnt);
+                 i = temp.index+1;
+                 ans += temp.res;
+                 cnt = 0;
+
+            } else if(ch==']') {
+                for(int j=0;j<num;j++) {
+                    s = s + ans;
+                }
+                res.index = i;
+                res.res = s;
+                return res;
+
+            } else {
+                ans = ans+ch;
+                i++;
+            }
+
+        }
+
+        res.index = i;
+        res.res = ans;
+
         return res;
     }
 
-    public static void update(int[] arr, int index, int socre) {
-        if(index<=0 || index>arr.length) return;
-        arr[index-1] = socre;
-    }
+
+
+
+
+
+}
+class Info{
+    public int index;
+    public String res;
+
 
 }
